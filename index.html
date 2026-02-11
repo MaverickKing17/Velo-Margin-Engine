@@ -6,22 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exotic Intel GTA | Luxury Car Arbitrage</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            'luxury-dark': '#1A1A1C',
-            'luxury-card': '#242426',
-            'emerald-accent': '#10B981',
+            'nardo-grey': '#4F5D65',
+            'obsidian-matte': '#1A1A1A',
+            'silver-frost': 'rgba(229, 228, 226, 0.2)',
+            'deep-royal': '#002366',
+            'brembo-red': '#E30613',
+            'green-signal': '#00FF41',
+            'luxury-card': '#1A1A1A',
+            'emerald-accent': '#00FF41',
             'electric-blue': '#3B82F6',
             'deep-gold': '#D4AF37',
-            'border-gray': '#2F2F32'
+            'border-gray': 'rgba(229, 228, 226, 0.2)'
           },
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             display: ['Montserrat', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           }
         }
       }
@@ -29,23 +35,37 @@
   </script>
   <style>
     body {
-      background-color: #1A1A1C;
+      background: linear-gradient(135deg, #4F5D65 0%, #3A454B 100%);
+      background-attachment: fixed;
       color: #FFFFFF;
       margin: 0;
       font-family: 'Inter', sans-serif;
     }
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      background: rgba(26, 26, 26, 0.7);
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 40s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #1A1A1C;
+      background: #1A1A1A;
     }
     ::-webkit-scrollbar-thumb {
-      background: #3A3A3D;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #4A4A4F;
+      background: #4F5D65;
+      border-radius: 3px;
     }
   </style>
 <script type="importmap">

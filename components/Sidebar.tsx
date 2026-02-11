@@ -15,20 +15,20 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
   };
 
   return (
-    <aside className="w-full lg:w-72 border-r border-border-gray bg-luxury-dark p-6 overflow-y-auto max-h-[calc(100vh-64px)] scrollbar-hide lg:sticky lg:top-16">
+    <aside className="w-full lg:w-72 border-r border-silver-frost glass-effect p-6 overflow-y-auto max-h-[calc(100vh-104px)] scrollbar-hide lg:sticky lg:top-[104px]">
       <div className="flex items-center gap-2 mb-8">
         <Filter className="w-4 h-4 text-deep-gold" />
-        <h2 className="font-display font-bold text-sm uppercase tracking-widest">Sourcing Filters</h2>
+        <h2 className="font-display font-bold text-xs uppercase tracking-[0.2em] text-white">Sourcing Metrics</h2>
       </div>
 
       <div className="space-y-8">
         {/* Monthly Payment Filter (2026 Audit) */}
         <section>
           <div className="flex justify-between items-center mb-4">
-            <label className="text-[10px] font-bold text-gray-500 uppercase flex items-center gap-1">
-              <Wallet className="w-3 h-3" /> Max Monthly Focus
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-1">
+              <Wallet className="w-3 h-3" /> Max Monthly Target
             </label>
-            <span className="text-xs font-bold text-electric-blue">${filters.maxMonthlyPayment.toLocaleString()}</span>
+            <span className="text-xs font-mono font-bold text-electric-blue">${filters.maxMonthlyPayment.toLocaleString()}</span>
           </div>
           <input 
             type="range" 
@@ -45,30 +45,30 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
         <section>
           <button 
             onClick={() => setFilters(prev => ({ ...prev, cpoOnly: !prev.cpoOnly }))}
-            className={`w-full py-2 px-4 rounded-lg border text-[10px] font-bold uppercase transition-all flex items-center justify-center gap-2 ${
-              filters.cpoOnly ? 'bg-emerald-accent/20 border-emerald-accent text-emerald-accent' : 'bg-luxury-card border-border-gray text-gray-400'
+            className={`w-full py-2.5 px-4 rounded-lg border-[0.5px] text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
+              filters.cpoOnly ? 'bg-emerald-accent/20 border-emerald-accent text-emerald-accent shadow-[0_0_15px_rgba(0,255,65,0.2)]' : 'bg-white/5 border-silver-frost text-gray-400'
             }`}
           >
-            <ShieldCheck className="w-3.5 h-3.5" /> {filters.cpoOnly ? '2026 CPO ONLY: ON' : 'FILTER BY CPO'}
+            <ShieldCheck className="w-3.5 h-3.5" /> {filters.cpoOnly ? 'CPO ONLY ACTIVE' : 'FILTER BY CPO'}
           </button>
         </section>
 
         {/* Makes */}
         <section>
-          <label className="text-[10px] font-bold text-gray-500 uppercase mb-3 block">Manufacturer</label>
-          <div className="space-y-2">
+          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">Manufacturer</label>
+          <div className="space-y-2.5">
             {MAKES.map(make => (
-              <label key={make} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white cursor-pointer group">
+              <label key={make} className="flex items-center gap-3 text-sm text-gray-400 hover:text-white cursor-pointer group transition-colors">
                 <input 
                   type="checkbox" 
                   className="hidden"
                   checked={filters.makes.includes(make)}
                   onChange={() => setFilters(prev => ({ ...prev, makes: toggleSelection(prev.makes, make) }))}
                 />
-                <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${filters.makes.includes(make) ? 'bg-electric-blue border-electric-blue' : 'border-border-gray group-hover:border-gray-500'}`}>
+                <div className={`w-4 h-4 rounded border-[0.5px] flex items-center justify-center transition-all ${filters.makes.includes(make) ? 'bg-electric-blue border-electric-blue' : 'border-silver-frost group-hover:border-gray-500'}`}>
                   {filters.makes.includes(make) && <CheckCircle className="w-3 h-3 text-white" />}
                 </div>
-                {make}
+                <span className="font-medium tracking-tight">{make}</span>
               </label>
             ))}
           </div>
@@ -76,20 +76,20 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
 
         {/* GTA Region */}
         <section>
-          <label className="text-[10px] font-bold text-gray-500 uppercase mb-3 block">GTA Region</label>
-          <div className="space-y-2">
+          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">Regional Hubs</label>
+          <div className="space-y-2.5">
             {REGIONS.map(region => (
-              <label key={region} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white cursor-pointer group">
+              <label key={region} className="flex items-center gap-3 text-sm text-gray-400 hover:text-white cursor-pointer group transition-colors">
                 <input 
                   type="checkbox" 
                   className="hidden"
                   checked={filters.regions.includes(region)}
                   onChange={() => setFilters(prev => ({ ...prev, regions: toggleSelection(prev.regions, region) }))}
                 />
-                <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${filters.regions.includes(region) ? 'bg-deep-gold border-deep-gold' : 'border-border-gray group-hover:border-gray-500'}`}>
+                <div className={`w-4 h-4 rounded border-[0.5px] flex items-center justify-center transition-all ${filters.regions.includes(region) ? 'bg-deep-gold border-deep-gold' : 'border-silver-frost group-hover:border-gray-500'}`}>
                   {filters.regions.includes(region) && <CheckCircle className="w-3 h-3 text-white" />}
                 </div>
-                {region}
+                <span className="font-medium tracking-tight">{region}</span>
               </label>
             ))}
           </div>
@@ -98,8 +98,8 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
         {/* Vibe Score Slider */}
         <section>
           <div className="flex justify-between items-center mb-4">
-            <label className="text-[10px] font-bold text-gray-500 uppercase">Min Vibe Score</label>
-            <span className="text-xs font-bold text-deep-gold">{filters.minVibeScore}+</span>
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Arbitrage Threshold</label>
+            <span className="text-xs font-mono font-bold text-deep-gold">{filters.minVibeScore}+</span>
           </div>
           <input 
             type="range" 
@@ -118,9 +118,9 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
             maxMonthlyPayment: 15000, cpoOnly: false,
             minYear: 2000, maxYear: 2025, minVibeScore: 0, regions: [], rarityKeywords: []
           })}
-          className="w-full py-2 bg-luxury-dark border border-border-gray text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-white hover:border-white transition-all rounded"
+          className="w-full py-3 bg-white/5 border border-silver-frost text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-white hover:border-white transition-all rounded-lg"
         >
-          Reset Filters
+          CLEAR ALL FILTERS
         </button>
       </div>
     </aside>

@@ -44,6 +44,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     daysToTurnUs: 9,
     vehicleHealthScore: 98,
     monthlyPaymentCad: 4850,
+    priceDelta7d: -2.4,
+    scrapeTimestamp: new Date().toISOString(),
     priceHistory: [
       { date: '2024-01-01', price: 325000 },
       { date: '2024-02-15', price: 315000 }
@@ -77,6 +79,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     daysToTurnUs: 11,
     vehicleHealthScore: 94,
     monthlyPaymentCad: 4200,
+    priceDelta7d: 0.0,
+    scrapeTimestamp: new Date().toISOString(),
     priceHistory: [
       { date: '2023-12-01', price: 305000 },
       { date: '2024-03-01', price: 295000 }
@@ -110,6 +114,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     daysToTurnUs: 15,
     vehicleHealthScore: 99,
     monthlyPaymentCad: 8900,
+    priceDelta7d: -1.2,
+    scrapeTimestamp: new Date().toISOString(),
     priceHistory: [
       { date: '2024-01-10', price: 659000 },
       { date: '2024-02-28', price: 649000 }

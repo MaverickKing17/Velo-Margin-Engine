@@ -34,6 +34,9 @@ export interface CarListing {
   vehicleHealthScore: number; // Telematics API simulation
   priceHistory: PricePoint[];
   monthlyPaymentCad: number; // Calculated field for Affordability Filter
+  // PDF Update v4
+  priceDelta7d: number; // Percentage change over 7 days
+  scrapeTimestamp: string;
 }
 
 export interface FilterState {

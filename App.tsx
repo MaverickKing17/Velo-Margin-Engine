@@ -5,6 +5,7 @@ import TopBar from './components/TopBar';
 import Sidebar from './components/Sidebar';
 import ListingCard from './components/ListingCard';
 import Footer from './components/Footer';
+import ArbitrageTicker from './components/ArbitrageTicker';
 import { MOCK_LISTINGS } from './constants';
 import { FilterState, CarListing } from './types';
 import { Loader2, AlertTriangle, CheckCircle2, TrendingUp, X, Shield, Scale, Info, HelpCircle } from 'lucide-react';
@@ -140,38 +141,39 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-luxury-dark text-white">
+    <div className="flex flex-col min-h-screen">
+      <ArbitrageTicker />
       <TopBar 
         onSearch={(q) => setFilters(prev => ({ ...prev, searchQuery: q }))} 
-        activeAlertsCount={4}
+        activeAlertsCount={12}
         totalOpportunities={filteredListings.length}
       />
       
       <div className="flex flex-col lg:flex-row flex-1">
         <Sidebar filters={filters} setFilters={setFilters} />
         
-        <main className="flex-1 p-6 bg-luxury-dark/30">
-          <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <main className="flex-1 p-6 lg:p-10">
+          <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
-              <h2 className="text-3xl font-display font-bold text-white">Luxury Sourcing Feed</h2>
-              <p className="text-gray-300 text-base mt-1 font-medium tracking-wide">2026 Audit Ready: Premium Arbitrage & Logistics.</p>
+              <h2 className="text-4xl font-display font-bold text-white tracking-tight">Luxury Sourcing Feed</h2>
+              <p className="text-gray-300 text-lg mt-2 font-medium tracking-wide opacity-80">Institutional grade data for GTA market arbitrage.</p>
             </div>
-            <div className="flex items-center gap-6 bg-luxury-card p-5 rounded-2xl border border-border-gray shadow-xl">
+            <div className="flex items-center gap-8 bg-obsidian-matte/60 glass-effect p-6 rounded-2xl border-[0.5px] border-silver-frost shadow-2xl">
               <div className="text-right">
-                <span className="text-xs font-black text-gray-400 uppercase tracking-widest">2026 GTA Market</span>
-                <p className="text-emerald-accent text-lg font-black flex items-center gap-1 justify-end">
-                  <TrendingUp className="w-4 h-4" /> Bullish +4.2%
+                <span className="text-xs font-black text-gray-500 uppercase tracking-widest">GTA BULLISHNESS</span>
+                <p className="text-green-signal text-xl font-mono font-bold flex items-center gap-2 justify-end mt-1">
+                  <TrendingUp className="w-5 h-5" /> +4.2%
                 </p>
               </div>
-              <div className="h-12 w-px bg-border-gray"></div>
+              <div className="h-14 w-px bg-silver-frost"></div>
               <div className="text-right">
-                <span className="text-xs font-black text-gray-400 uppercase tracking-widest">Broker Yield</span>
-                <p className="text-electric-blue text-lg font-black">$12.4k Avg/Unit</p>
+                <span className="text-xs font-black text-gray-500 uppercase tracking-widest">AVG BROKER YIELD</span>
+                <p className="text-electric-blue text-xl font-mono font-bold mt-1">$12,450</p>
               </div>
             </div>
           </header>
 
-          <div className="grid grid-cols-1 gap-10 mb-20">
+          <div className="grid grid-cols-1 gap-12 mb-24 max-w-7xl">
             {filteredListings.length > 0 ? (
               filteredListings.map(car => (
                 <ListingCard 
@@ -182,18 +184,18 @@ const Dashboard: React.FC = () => {
                 />
               ))
             ) : (
-              <div className="flex flex-col items-center justify-center py-40 bg-luxury-card rounded-3xl border border-dashed border-border-gray">
-                <AlertTriangle className="w-16 h-16 text-gray-600 mb-6" />
-                <p className="text-gray-300 text-lg font-bold">No units matching high-yield arbitrage criteria.</p>
+              <div className="flex flex-col items-center justify-center py-48 glass-effect rounded-[2rem] border-[0.5px] border-dashed border-silver-frost">
+                <AlertTriangle className="w-20 h-20 text-gray-600 mb-8" />
+                <p className="text-gray-300 text-2xl font-bold tracking-tight">No high-yield matches in current live feed.</p>
                 <button 
                   onClick={() => setFilters({
                     searchQuery: '', makes: [], minPrice: 0, maxPrice: 1000000, 
                     maxMonthlyPayment: 15000, cpoOnly: false,
                     minYear: 2000, maxYear: 2025, minVibeScore: 0, regions: [], rarityKeywords: []
                   })}
-                  className="mt-6 px-8 py-3 bg-luxury-dark border border-border-gray rounded-xl text-electric-blue text-sm font-black uppercase hover:bg-border-gray transition-all"
+                  className="mt-8 px-10 py-4 bg-obsidian-matte border border-silver-frost rounded-xl text-deep-gold text-xs font-black uppercase tracking-[0.2em] hover:bg-white hover:text-obsidian-matte transition-all"
                 >
-                  Reset Arbitrage Engine
+                  RESTART ARBITRAGE SCAN
                 </button>
               </div>
             )}
@@ -205,26 +207,26 @@ const Dashboard: React.FC = () => {
 
       {/* Legal Content Modal */}
       {activeLegalTab && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-[200] flex items-center justify-center p-6 animate-in fade-in">
-          <div className="bg-luxury-card w-full max-w-2xl rounded-3xl border border-deep-gold/30 p-10 shadow-2xl relative">
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-2xl z-[200] flex items-center justify-center p-6 animate-in fade-in">
+          <div className="bg-obsidian-matte w-full max-w-2xl rounded-[2.5rem] border-[0.5px] border-deep-gold/30 p-12 shadow-2xl relative">
             <button 
               onClick={() => setActiveLegalTab(null)}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="absolute top-8 right-8 p-3 rounded-full hover:bg-white/10 transition-colors border border-silver-frost"
             >
               <X className="w-6 h-6 text-gray-400" />
             </button>
-            <div className="flex flex-col items-center mb-8 text-center">
+            <div className="flex flex-col items-center mb-10 text-center">
               {getIcon(activeLegalTab)}
-              <h2 className="text-3xl font-display font-bold text-deep-gold">{activeLegalTab}</h2>
-              <div className="w-16 h-1 bg-border-gray mt-4 rounded-full"></div>
+              <h2 className="text-4xl font-display font-bold text-white tracking-tight">{activeLegalTab}</h2>
+              <div className="w-24 h-1 bg-deep-gold mt-6 rounded-full"></div>
             </div>
-            <div className="text-gray-200 text-lg leading-relaxed font-medium overflow-y-auto max-h-[60vh] pr-4 whitespace-pre-line">
+            <div className="text-gray-300 text-lg leading-relaxed font-medium overflow-y-auto max-h-[50vh] pr-4 whitespace-pre-line custom-scrollbar">
               {getLegalContent(activeLegalTab)}
             </div>
-            <div className="mt-10 flex justify-end">
+            <div className="mt-12 flex justify-center">
               <button 
                 onClick={() => setActiveLegalTab(null)}
-                className="px-8 py-4 bg-deep-gold hover:bg-white text-luxury-dark font-black uppercase rounded-xl transition-all text-sm tracking-widest shadow-lg shadow-deep-gold/10"
+                className="px-12 py-5 bg-deep-gold hover:bg-white text-obsidian-matte font-black uppercase rounded-2xl transition-all text-xs tracking-[0.3em] shadow-2xl shadow-deep-gold/20"
               >
                 CLOSE AUDIT
               </button>
@@ -235,16 +237,16 @@ const Dashboard: React.FC = () => {
 
       {/* Overlay Loading (Prequal & Appraisal) */}
       {(prequalifying || appraising) && (
-        <div className="fixed inset-0 bg-luxury-dark/90 backdrop-blur-md z-[100] flex flex-col items-center justify-center animate-in fade-in">
-          <div className="bg-luxury-card p-12 rounded-3xl border border-deep-gold/30 flex flex-col items-center max-w-md text-center shadow-2xl">
-            <Loader2 className="w-16 h-16 text-deep-gold animate-spin mb-8" />
-            <h3 className="text-2xl font-display font-bold mb-3 text-white">
-              {prequalifying ? 'Syncing Omnichannel Thread' : 'Calculating Real-Time Appraisal'}
+        <div className="fixed inset-0 bg-obsidian-matte/95 backdrop-blur-xl z-[100] flex flex-col items-center justify-center animate-in fade-in">
+          <div className="bg-obsidian-matte p-16 rounded-[3rem] border-[0.5px] border-deep-gold/40 flex flex-col items-center max-w-lg text-center shadow-[0_0_100px_rgba(212,175,55,0.15)]">
+            <Loader2 className="w-20 h-20 text-deep-gold animate-spin mb-10" />
+            <h3 className="text-3xl font-display font-bold mb-4 text-white tracking-tight uppercase">
+              {prequalifying ? 'OMNICHANNEL SYNC' : 'QUANT COMPILATION'}
             </h3>
-            <p className="text-gray-300 text-base leading-relaxed font-medium">
+            <p className="text-gray-400 text-lg leading-relaxed font-mono opacity-70">
               {prequalifying 
-                ? `Syncing 2026 Voiceflow Agent for ${prequalifying.title}...` 
-                : `Fetching global retail comps for ${appraising?.title}...`}
+                ? `ESTABLISHING 2026 VOICEFLOW PROTOCOL FOR ${prequalifying.title}...` 
+                : `FETCHING GLOBAL RETAIL COMPS FOR ${appraising?.title}...`}
             </p>
           </div>
         </div>
@@ -252,10 +254,10 @@ const Dashboard: React.FC = () => {
 
       {/* Notification Toast */}
       {showNotification && (
-        <div className="fixed bottom-12 right-12 z-[110] animate-in slide-in-from-bottom-full duration-500">
-          <div className="bg-emerald-accent text-white px-10 py-6 rounded-3xl shadow-[0_30px_60px_rgba(16,185,129,0.4)] flex items-center gap-5 border border-white/20">
-            <CheckCircle2 className="w-8 h-8" />
-            <span className="text-lg font-black tracking-tight">{showNotification}</span>
+        <div className="fixed bottom-12 right-12 z-[110] animate-in slide-in-from-right-full duration-700">
+          <div className="bg-green-signal text-obsidian-matte px-10 py-6 rounded-[2rem] shadow-[0_40px_80px_rgba(0,255,65,0.3)] flex items-center gap-6 border border-white/40">
+            <CheckCircle2 className="w-10 h-10" />
+            <span className="text-lg font-black tracking-tight uppercase">{showNotification}</span>
           </div>
         </div>
       )}
