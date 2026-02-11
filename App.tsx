@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import ArbitrageTicker from './components/ArbitrageTicker';
 import StatBar from './components/StatBar';
 import FlipCalculatorModal from './components/FlipCalculatorModal';
+import LegalModal from './components/LegalModal';
 import { MOCK_LISTINGS } from './constants';
 import { FilterState, CarListing } from './types';
 import { Loader2, AlertTriangle, CheckCircle2 } from 'lucide-react';
@@ -32,6 +33,7 @@ const Dashboard: React.FC = () => {
   const [prequalifying, setPrequalifying] = useState<CarListing | null>(null);
   const [showNotification, setShowNotification] = useState<string | null>(null);
   const [selectedCalcCar, setSelectedCalcCar] = useState<CarListing | null>(null);
+  const [activeLegalPage, setActiveLegalPage] = useState<string | null>(null);
 
   const filteredListings = useMemo(() => {
     return listings.filter(car => {
@@ -142,12 +144,19 @@ const Dashboard: React.FC = () => {
         </main>
       </div>
 
-      <Footer onLegalClick={() => {}} />
+      <Footer onLegalClick={(type) => setActiveLegalPage(type)} />
 
       {selectedCalcCar && (
         <FlipCalculatorModal 
           car={selectedCalcCar} 
           onClose={() => setSelectedCalcCar(null)} 
+        />
+      )}
+
+      {activeLegalPage && (
+        <LegalModal 
+          type={activeLegalPage} 
+          onClose={() => setActiveLegalPage(null)} 
         />
       )}
 

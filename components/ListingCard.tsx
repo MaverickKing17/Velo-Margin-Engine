@@ -2,7 +2,7 @@
 import React from 'react';
 import { CarListing } from '../types';
 import { 
-  Bookmark, ShieldCheck, Globe, Zap, Clock, Calculator, Star, Flag
+  Bookmark, ShieldCheck, Globe, Zap, Clock, Calculator, Star, Flag, Award
 } from 'lucide-react';
 import VibeScoreDial from './VibeScoreDial';
 
@@ -58,118 +58,140 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify, onOpenCalc
   const displayVibeScore = isZeroTariff ? Math.min(100, car.vibeScore + 15) : car.vibeScore;
 
   return (
-    <div className={`bg-obsidian-matte rounded-xl overflow-hidden group transition-all duration-500 flex flex-col xl:flex-row h-full shadow-2xl relative ${
+    <div className={`bg-midnight-royal/40 backdrop-blur-md rounded-[2rem] overflow-hidden group transition-all duration-700 flex flex-col xl:flex-row h-full shadow-2xl relative border ${
       isZeroTariff 
-        ? 'border-2 border-electric-gold shadow-[0_0_40px_rgba(255,215,0,0.15)] ring-1 ring-electric-gold/30' 
-        : 'border-0.5 border-silver-frost hover:border-deep-gold/50'
+        ? 'border-electric-gold border-2 shadow-[0_0_60px_rgba(255,215,0,0.2)] ring-4 ring-electric-gold/5' 
+        : 'border-white/10 hover:border-captivating-blue/50'
     }`}>
       
+      {/* Zero-Tariff Ribbon Badge (Prominent) */}
+      {isZeroTariff && (
+        <div className="absolute top-0 left-0 z-40">
+          <div className="bg-electric-gold text-midnight-indigo font-black text-[10px] py-2 px-8 shadow-xl transform -rotate-45 -translate-x-6 translate-y-2 uppercase tracking-[0.2em] border-b border-midnight-indigo/20 flex items-center gap-2">
+            <Award className="w-3 h-3" /> Zero Tariff
+          </div>
+        </div>
+      )}
+
       {/* Vibe Score Badge */}
-      <div className="absolute top-4 right-4 z-10 scale-75 origin-top-right">
-        <VibeScoreDial score={displayVibeScore} />
+      <div className="absolute top-6 right-6 z-10 scale-90 origin-top-right">
+        <VibeScoreDial score={displayVibeScore} size="md" />
       </div>
 
       {/* Image Section */}
-      <div className="relative w-full xl:w-96 h-64 xl:h-auto overflow-hidden">
+      <div className="relative w-full xl:w-[450px] h-72 xl:h-auto overflow-hidden">
         <img 
           src={car.imageUrl} 
           alt={car.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
         />
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight-royal/80 via-transparent to-transparent"></div>
+        
+        <div className="absolute bottom-6 left-6 flex flex-col gap-3">
           {isZeroTariff && (
-            <span className="bg-electric-gold text-obsidian-matte text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 uppercase tracking-tighter animate-pulse">
-              <Star className="w-3.5 h-3.5 fill-current" /> DOMESTIC RETURN: 0% DUTY
+            <span className="bg-electric-gold text-midnight-indigo text-xs font-black px-4 py-2 rounded-xl shadow-[0_10px_20px_rgba(255,215,0,0.3)] flex items-center gap-2 uppercase tracking-tight animate-pulse border border-white/30">
+              <Star className="w-4 h-4 fill-current" /> DOMESTIC RETURN: 0% DUTY
             </span>
           )}
           <div className="flex gap-2">
-            <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-black px-2 py-1 rounded border border-white/20 flex items-center gap-1.5 uppercase tracking-tighter">
-              <span className="text-sm">{flag}</span> {originLabel}
+            <span className="bg-white/10 backdrop-blur-xl text-white text-[10px] font-black px-3 py-1.5 rounded-lg border border-white/20 flex items-center gap-2 uppercase tracking-widest">
+              <span className="text-lg">{flag}</span> {originLabel} ORIGIN
             </span>
             {car.cpoStatus && (
-              <span className="bg-emerald-green text-obsidian-matte text-[10px] font-black px-2 py-1 rounded shadow-lg flex items-center gap-1 uppercase tracking-tighter">
-                <ShieldCheck className="w-3 h-3" /> CPO
+              <span className="bg-emerald-green text-midnight-indigo text-[10px] font-black px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5 uppercase tracking-widest border border-white/20">
+                <ShieldCheck className="w-3.5 h-3.5" /> PLATINUM CPO
               </span>
             )}
           </div>
         </div>
-        <button className="absolute bottom-3 right-3 p-2 rounded-full bg-obsidian-matte/80 text-gray-400 hover:text-white transition-colors backdrop-blur-sm border-0.5 border-silver-frost">
-          <Bookmark className="w-4 h-4" />
+        
+        <button className="absolute top-6 left-6 p-3 rounded-2xl bg-white/10 text-white hover:bg-electric-gold hover:text-midnight-indigo transition-all backdrop-blur-md border border-white/20 z-10">
+          <Bookmark className="w-5 h-5" />
         </button>
       </div>
 
       {/* Content Section */}
-      <div className="flex-1 p-6 flex flex-col">
-        <header className="mb-4 pr-16">
-          <h3 className="font-display font-bold text-2xl leading-tight text-white group-hover:text-electric-gold transition-colors">
-            {car.year} {car.make} {car.model}
+      <div className="flex-1 p-8 xl:p-10 flex flex-col">
+        <header className="mb-6 pr-24">
+          <h3 className="font-display font-bold text-3xl xl:text-4xl leading-tight text-white group-hover:text-electric-gold transition-colors duration-500">
+            {car.year} {car.make} <span className="text-white/80">{car.model}</span>
           </h3>
-          <p className="text-gray-400 text-xs mt-1 font-mono uppercase tracking-widest flex items-center gap-2">
-            <Globe className="w-3 h-3" /> {car.location} • <span className="text-deep-gold">{car.dealerName}</span>
+          <p className="text-slate-400 text-sm mt-3 font-mono uppercase tracking-[0.15em] flex items-center gap-3">
+            <Globe className="w-4 h-4 text-captivating-blue" /> {car.location} <span className="text-white/20">|</span> <span className="text-electric-gold font-bold">{car.dealerName}</span>
           </p>
         </header>
 
-        {/* Price Section */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-white/5 rounded-xl border border-silver-frost/10">
-            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest block mb-1">GTA Listing (CAD)</span>
-            <p className="font-mono font-bold text-white text-xl">${car.price.toLocaleString()}</p>
+        {/* Price & Settlement Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="p-6 bg-white/5 rounded-3xl border border-white/10 shadow-inner group/price relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-12 translate-x-12 blur-2xl"></div>
+            <span className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] block mb-2">GTA Listing (CAD)</span>
+            <p className="font-mono font-bold text-white text-3xl tracking-tighter">${car.price.toLocaleString()}</p>
           </div>
+          
           <button 
             onClick={() => onOpenCalculator(car)}
-            className={`p-4 rounded-xl border transition-all group/price text-left ${
+            className={`p-6 rounded-3xl border-2 transition-all duration-500 group/calc relative overflow-hidden text-left ${
               isZeroTariff 
-                ? 'bg-electric-gold/10 border-electric-gold/40 hover:bg-electric-gold/20' 
-                : 'bg-emerald-green/5 border-emerald-green/20 hover:bg-emerald-green/10'
+                ? 'bg-electric-gold/10 border-electric-gold shadow-[0_15px_30px_rgba(255,215,0,0.1)] hover:bg-electric-gold/20' 
+                : 'bg-emerald-green/5 border-emerald-green/30 hover:border-emerald-green hover:bg-emerald-green/10'
             }`}
           >
-            <span className={`text-[10px] font-black uppercase tracking-widest flex items-center justify-between mb-1 ${
+            <div className={`absolute top-0 right-0 p-4 transition-transform group-hover/calc:rotate-12 ${isZeroTariff ? 'text-electric-gold' : 'text-emerald-green'}`}>
+              <Calculator className="w-6 h-6" />
+            </div>
+            <span className={`text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 mb-2 ${
               isZeroTariff ? 'text-electric-gold' : 'text-emerald-green'
             }`}>
-              US Settlement
-              <Calculator className="w-3.5 h-3.5 group-hover/price:rotate-12 transition-transform" />
+              2026 US Settlement
             </span>
-            <p className={`font-mono font-bold text-xl ${
+            <p className={`font-mono font-bold text-3xl tracking-tighter ${
               isZeroTariff ? 'text-electric-gold' : 'text-emerald-green'
             }`}>
-              ${settlement.totalUsd.toLocaleString()} <span className="text-[10px]">USD</span>
+              ${settlement.totalUsd.toLocaleString()} <span className="text-xs ml-1">USD</span>
             </p>
           </button>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-6 border-y border-silver-frost/10 py-4">
-          <div>
-            <span className="text-[9px] text-gray-500 font-bold uppercase block mb-1">Origin Label</span>
-            <div className={`flex items-center gap-1.5 text-xs font-mono font-black ${isZeroTariff ? 'text-electric-gold' : 'text-emerald-green'}`}>
-              <Flag className="w-3 h-3" /> {settlement.originLabel}
+        {/* Audit Highlights */}
+        <div className="grid grid-cols-3 gap-6 mb-8 border-y border-white/5 py-6">
+          <div className="space-y-1">
+            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Audit Label</span>
+            <div className={`flex items-center gap-2 text-[11px] font-mono font-black uppercase tracking-tighter ${isZeroTariff ? 'text-electric-gold' : 'text-emerald-green'}`}>
+              <Flag className="w-3.5 h-3.5" /> {settlement.originLabel}
             </div>
           </div>
-          <div>
-            <span className="text-[9px] text-gray-500 font-bold uppercase block mb-1">Tariff Savings</span>
-            <div className="flex items-center gap-1.5 text-xs text-emerald-green font-mono font-bold">
-              +${settlement.tariffSavings.toLocaleString()}
+          <div className="space-y-1">
+            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Tariff Delta</span>
+            <div className="flex items-center gap-2 text-[11px] text-emerald-green font-mono font-black tracking-tighter">
+              <TrendingUp className="w-3.5 h-3.5" /> +${settlement.tariffSavings.toLocaleString()} SAVED
             </div>
           </div>
-          <div>
-            <span className="text-[9px] text-gray-500 font-bold uppercase block mb-1">DTT Gap (GTA vs US)</span>
-            <div className="flex items-center gap-1.5 text-xs text-white font-mono">
-              {car.daysToTurnGta}d / <span className="text-electric-blue">{car.daysToTurnUs}d</span>
+          <div className="space-y-1">
+            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Market Velocity</span>
+            <div className="flex items-center gap-2 text-[11px] text-white font-mono font-bold">
+              <Clock className="w-3.5 h-3.5 text-captivating-blue" /> {car.daysToTurnGta}d <span className="text-slate-600">→</span> <span className="text-captivating-blue">{car.daysToTurnUs}d</span>
             </div>
           </div>
         </div>
 
-        <div className="mt-auto flex items-center gap-3">
+        <div className="mt-auto flex items-center gap-4">
           <button 
             onClick={() => onPrequalify(car)}
-            className="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-white hover:bg-electric-gold active:scale-[0.98] text-obsidian-matte text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-xl group/btn"
+            className="flex-1 flex items-center justify-center gap-4 px-8 py-5 bg-white hover:bg-electric-gold active:scale-[0.97] text-midnight-indigo text-xs font-black uppercase tracking-[0.3em] rounded-2xl transition-all duration-300 shadow-2xl group/btn"
           >
-            <Zap className={`w-4 h-4 group-hover/btn:fill-current ${isZeroTariff ? 'text-electric-gold' : 'text-captivating-blue'}`} />
-            Prequalify Lead
+            <Zap className={`w-5 h-5 group-hover/btn:fill-current ${isZeroTariff ? 'text-electric-gold' : 'text-captivating-blue'}`} />
+            Prequalify High-Yield Lead
           </button>
         </div>
       </div>
     </div>
   );
 };
+
+// Re-using local trending icon since it was used but not imported
+const TrendingUp = ({ className }: { className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+);
 
 export default ListingCard;
