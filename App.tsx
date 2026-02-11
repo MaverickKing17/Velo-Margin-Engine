@@ -15,11 +15,13 @@ const Dashboard: React.FC = () => {
     makes: [],
     minPrice: 0,
     maxPrice: 1000000,
+    maxMonthlyPayment: 15000,
     minYear: 2000,
     maxYear: 2025,
     minVibeScore: 0,
     regions: [],
-    rarityKeywords: []
+    rarityKeywords: [],
+    cpoOnly: false
   });
 
   const [prequalifying, setPrequalifying] = useState<CarListing | null>(null);
@@ -34,24 +36,24 @@ const Dashboard: React.FC = () => {
       const matchesMake = filters.makes.length === 0 || filters.makes.includes(car.make);
       const matchesRegion = filters.regions.length === 0 || filters.regions.includes(car.region);
       const matchesVibe = car.vibeScore >= filters.minVibeScore;
+      const matchesCPO = !filters.cpoOnly || car.cpoStatus;
+      const matchesPayment = car.monthlyPaymentCad <= filters.maxMonthlyPayment;
       
       const matchesKeywords = filters.rarityKeywords.length === 0 || 
                              filters.rarityKeywords.some(k => car.rarityKeywords.includes(k));
 
-      return matchesSearch && matchesMake && matchesRegion && matchesVibe && matchesKeywords;
+      return matchesSearch && matchesMake && matchesRegion && matchesVibe && matchesKeywords && matchesCPO && matchesPayment;
     }).sort((a, b) => b.vibeScore - a.vibeScore);
   }, [filters, listings]);
 
   const handlePrequalify = async (car: CarListing) => {
     setPrequalifying(car);
     
-    // Simulate Voiceflow Webhook Call
+    // 2026 Voiceflow One-Conversation Logic Simulation
     try {
-      console.log(`Triggering Voiceflow Webhook for: ${car.title}`);
-      // In a real app: await fetch('/api/voiceflow-webhook', { method: 'POST', body: JSON.stringify(car) });
-      
+      console.log(`Initializing Omnichannel Voiceflow Thread for VIN: ${car.vin}`);
       await new Promise(resolve => setTimeout(resolve, 1500));
-      setShowNotification(`Voiceflow AI Prequalification Agent initialized for ${car.make} ${car.model}`);
+      setShowNotification(`Voiceflow AI Agent synced with ${car.make} CRM - Browser History Logged.`);
       setTimeout(() => setShowNotification(null), 5000);
     } catch (err) {
       console.error(err);
@@ -72,14 +74,21 @@ const Dashboard: React.FC = () => {
         <Sidebar filters={filters} setFilters={setFilters} />
         
         <main className="flex-1 p-6 bg-luxury-dark/50">
-          <header className="mb-8 flex justify-between items-center">
+          <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <h2 className="text-2xl font-display font-bold">Luxury Sourcing Feed</h2>
-              <p className="text-gray-500 text-sm">Real-time GTA arbitrage data & US export analysis.</p>
+              <p className="text-gray-500 text-sm">2026 Audit Ready: Arbitrage Data & Export 2.0 Workflows.</p>
             </div>
-            <div className="text-right">
-              <span className="text-[10px] font-bold text-gray-500 uppercase">Market Health</span>
-              <p className="text-emerald-accent font-bold">Bullish +4.2%</p>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <span className="text-[10px] font-bold text-gray-500 uppercase">2026 GTA Market</span>
+                <p className="text-emerald-accent font-bold">Bullish +4.2%</p>
+              </div>
+              <div className="h-10 w-px bg-border-gray"></div>
+              <div className="text-right">
+                <span className="text-[10px] font-bold text-gray-500 uppercase">Broker Yield</span>
+                <p className="text-electric-blue font-bold">$12.4k Avg/Unit</p>
+              </div>
             </div>
           </header>
 
@@ -95,10 +104,11 @@ const Dashboard: React.FC = () => {
             ) : (
               <div className="flex flex-col items-center justify-center py-20 bg-luxury-card rounded-xl border border-dashed border-border-gray">
                 <AlertTriangle className="w-12 h-12 text-gray-700 mb-4" />
-                <p className="text-gray-500 font-medium">No luxury listings matching your current criteria.</p>
+                <p className="text-gray-500 font-medium">No 2026-compliant listings match these metrics.</p>
                 <button 
                   onClick={() => setFilters({
                     searchQuery: '', makes: [], minPrice: 0, maxPrice: 1000000, 
+                    maxMonthlyPayment: 15000, cpoOnly: false,
                     minYear: 2000, maxYear: 2025, minVibeScore: 0, regions: [], rarityKeywords: []
                   })}
                   className="mt-4 text-electric-blue text-sm font-bold hover:underline"
@@ -116,9 +126,9 @@ const Dashboard: React.FC = () => {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex flex-col items-center justify-center">
           <div className="bg-luxury-card p-8 rounded-2xl border border-deep-gold/50 flex flex-col items-center max-w-sm text-center shadow-2xl shadow-deep-gold/10">
             <Loader2 className="w-12 h-12 text-deep-gold animate-spin mb-6" />
-            <h3 className="text-xl font-display font-bold mb-2">Connecting Voiceflow Agent</h3>
+            <h3 className="text-xl font-display font-bold mb-2">Syncing 2026 Voiceflow Agent</h3>
             <p className="text-gray-400 text-sm mb-4">
-              Syncing {prequalifying.year} {prequalifying.make} data for lead qualification logic...
+              Initializing One-Conversation Logic for {prequalifying.title}...
             </p>
           </div>
         </div>

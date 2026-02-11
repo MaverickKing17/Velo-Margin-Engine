@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Filter, ChevronDown, CheckCircle } from 'lucide-react';
+import { Filter, ChevronDown, CheckCircle, Wallet, ShieldCheck } from 'lucide-react';
 import { MAKES, REGIONS, RARITY_KEYWORDS } from '../constants';
 import { FilterState } from '../types';
 
@@ -22,6 +22,37 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
       </div>
 
       <div className="space-y-8">
+        {/* Monthly Payment Filter (2026 Audit) */}
+        <section>
+          <div className="flex justify-between items-center mb-4">
+            <label className="text-[10px] font-bold text-gray-500 uppercase flex items-center gap-1">
+              <Wallet className="w-3 h-3" /> Max Monthly Focus
+            </label>
+            <span className="text-xs font-bold text-electric-blue">${filters.maxMonthlyPayment.toLocaleString()}</span>
+          </div>
+          <input 
+            type="range" 
+            min="1000" 
+            max="15000" 
+            step="500"
+            value={filters.maxMonthlyPayment}
+            onChange={(e) => setFilters(prev => ({ ...prev, maxMonthlyPayment: parseInt(e.target.value) }))}
+            className="w-full accent-electric-blue h-1 bg-border-gray rounded-lg appearance-none cursor-pointer"
+          />
+        </section>
+
+        {/* CPO Toggle */}
+        <section>
+          <button 
+            onClick={() => setFilters(prev => ({ ...prev, cpoOnly: !prev.cpoOnly }))}
+            className={`w-full py-2 px-4 rounded-lg border text-[10px] font-bold uppercase transition-all flex items-center justify-center gap-2 ${
+              filters.cpoOnly ? 'bg-emerald-accent/20 border-emerald-accent text-emerald-accent' : 'bg-luxury-card border-border-gray text-gray-400'
+            }`}
+          >
+            <ShieldCheck className="w-3.5 h-3.5" /> {filters.cpoOnly ? '2026 CPO ONLY: ON' : 'FILTER BY CPO'}
+          </button>
+        </section>
+
         {/* Makes */}
         <section>
           <label className="text-[10px] font-bold text-gray-500 uppercase mb-3 block">Manufacturer</label>
@@ -80,30 +111,11 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
           />
         </section>
 
-        {/* Rarity Keywords */}
-        <section>
-          <label className="text-[10px] font-bold text-gray-500 uppercase mb-3 block">Rarity Keywords</label>
-          <div className="flex flex-wrap gap-2">
-            {RARITY_KEYWORDS.map(keyword => (
-              <button
-                key={keyword}
-                onClick={() => setFilters(prev => ({ ...prev, rarityKeywords: toggleSelection(prev.rarityKeywords, keyword) }))}
-                className={`text-[10px] font-bold px-2 py-1 rounded transition-all ${
-                  filters.rarityKeywords.includes(keyword) 
-                    ? 'bg-electric-blue text-white' 
-                    : 'bg-luxury-card border border-border-gray text-gray-500 hover:text-white'
-                }`}
-              >
-                {keyword}
-              </button>
-            ))}
-          </div>
-        </section>
-
         {/* Reset */}
         <button 
           onClick={() => setFilters({
             searchQuery: '', makes: [], minPrice: 0, maxPrice: 1000000, 
+            maxMonthlyPayment: 15000, cpoOnly: false,
             minYear: 2000, maxYear: 2025, minVibeScore: 0, regions: [], rarityKeywords: []
           })}
           className="w-full py-2 bg-luxury-dark border border-border-gray text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-white hover:border-white transition-all rounded"

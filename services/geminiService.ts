@@ -6,23 +6,22 @@ export const getCarInsights = async (car: CarListing): Promise<string> => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const prompt = `
-    As a luxury car arbitrage expert for the GTA (Greater Toronto Area) market, analyze this vehicle:
+    As a 2026 luxury car arbitrage expert for the GTA (Greater Toronto Area) market, analyze this specific unit:
     Vehicle: ${car.year} ${car.make} ${car.model} ${car.trim}
     Price: $${car.price.toLocaleString()} CAD
     Odometer: ${car.odometer} KM
-    Rarity Keywords: ${car.rarityKeywords.join(', ')}
-    Description: ${car.description}
+    VIN: ${car.vin}
+    CPO Status: ${car.cpoStatus ? 'Platinum Certified' : 'Standard'}
+    Software-Defined Value (FoD): $${car.hiddenSoftwareValueCad} unlockable via OTA
+    Market Velocity (DTT): ${car.daysToTurnGta} days in GTA vs ${car.daysToTurnUs} days in US
+    
+    Analysis Requirements (2026 Audit Standards):
+    1. Hidden Value (FoD): Explain the profit potential of unlocking software modules (e.g., Performance Boosts, ADAS upgrades).
+    2. Market Velocity Arbitrage: Contrast the Days-to-Turn delta. Why is this unit a "Faster Turn" in the US?
+    3. FX Protection: Verify the settlement risk based on current 1.38 settlement rate.
 
-    Evaluation Logic Requirements:
-    1. Mileage Tiers: Units under 10,000km are "Collector Grade" (+15% Vibe). Units 10k-30k are "Driver Grade" (Neutral).
-    2. Color Premium: "Hero" or "Launch" colors (e.g., Shark Blue, Python Green, Rosso Corsa) command a $10k-$15k premium over "Standard" colors (Silver, Black, White) in the US export market.
-    3. Spec Rarity: Mention if the trim (e.g., Weissach, Touring, Pista) is a "Hard Asset" that holds value better.
-
-    Provide a 3-bullet point "Broker Intel" summary. 
-    Focus on:
-    - Valuation vs. standard market inventory.
-    - Specific desirability for US export (target states like FL, CA, TX).
-    - Profit margin risk (e.g., high mileage impact on resale).
+    Provide a concise "2026 Broker Intelligence" summary in 3 bullet points. 
+    Focus on the "Hidden Software Margin" and "Velocity Arbitrage."
     
     Return ONLY the 3 bullet points.
   `;
@@ -37,9 +36,9 @@ export const getCarInsights = async (car: CarListing): Promise<string> => {
         topP: 0.95,
       }
     });
-    return response.text || "Insight unavailable at this time.";
+    return response.text || "2026 Market Intelligence unavailable at this time.";
   } catch (error) {
-    console.error("Gemini Error:", error);
-    return "Failed to load AI insights.";
+    console.error("Gemini 2026 Audit Error:", error);
+    return "Failed to load real-time 2026 market insights.";
   }
 };
