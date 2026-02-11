@@ -22,21 +22,22 @@ export interface CarListing {
   aiInsights: string[];
   rarityKeywords: string[];
   region: string;
-  vin?: string;
+  vin: string;
   usExportProfitCad: number;
   isExportSuitable: boolean;
   // 2026 Audit Features
   cpoStatus: boolean;
-  hiddenSoftwareValueCad: number; // For FoD (Feature-on-Demand)
+  hiddenSoftwareValueCad: number; 
   recallStatus: 'Clear' | 'Action Required';
   daysToTurnGta: number;
   daysToTurnUs: number;
-  vehicleHealthScore: number; // Telematics API simulation
+  vehicleHealthScore: number; 
   priceHistory: PricePoint[];
-  monthlyPaymentCad: number; // Calculated field for Affordability Filter
-  // PDF Update v4
-  priceDelta7d: number; // Percentage change over 7 days
+  monthlyPaymentCad: number; 
+  priceDelta7d: number; 
   scrapeTimestamp: string;
+  // Zero-Tariff Extensions
+  originCountryCode?: string; // 'USA' | 'DEU' | 'ITA' | 'GBR'
 }
 
 export interface FilterState {
@@ -44,13 +45,14 @@ export interface FilterState {
   makes: string[];
   minPrice: number;
   maxPrice: number;
-  maxMonthlyPayment: number; // 2026 Affordability Filter
+  maxMonthlyPayment: number;
   minYear: number;
   maxYear: number;
   minVibeScore: number;
   regions: string[];
   rarityKeywords: string[];
   cpoOnly: boolean;
+  zeroTariffOnly: boolean; // New Sidebar Filter
 }
 
 export enum VibeCategory {

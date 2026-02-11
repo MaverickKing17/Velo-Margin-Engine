@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Filter, ChevronDown, CheckCircle, Wallet, ShieldCheck } from 'lucide-react';
+import { Filter, ChevronDown, CheckCircle, Wallet, ShieldCheck, Flag } from 'lucide-react';
 import { MAKES, REGIONS, RARITY_KEYWORDS } from '../constants';
 import { FilterState } from '../types';
 
@@ -22,6 +22,22 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
       </div>
 
       <div className="space-y-8">
+        {/* Zero-Tariff Toggle (v5 PDF Update) */}
+        <section>
+          <button 
+            onClick={() => setFilters(prev => ({ ...prev, zeroTariffOnly: !prev.zeroTariffOnly }))}
+            className={`w-full py-4 px-4 rounded-xl border-[0.5px] text-[10px] font-black uppercase tracking-widest transition-all flex flex-col items-center justify-center gap-2 ${
+              filters.zeroTariffOnly ? 'bg-electric-gold/20 border-electric-gold text-electric-gold shadow-[0_0_20px_rgba(255,215,0,0.25)]' : 'bg-white/5 border-silver-frost text-gray-400'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Flag className={`w-4 h-4 ${filters.zeroTariffOnly ? 'animate-bounce' : ''}`} /> 
+              {filters.zeroTariffOnly ? 'ZERO-TARIFF ACTIVE' : 'ZERO-TARIFF ONLY'}
+            </div>
+            <span className="text-[8px] opacity-70">(US-MADE VEHICLES)</span>
+          </button>
+        </section>
+
         {/* Monthly Payment Filter (2026 Audit) */}
         <section>
           <div className="flex justify-between items-center mb-4">
@@ -46,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
           <button 
             onClick={() => setFilters(prev => ({ ...prev, cpoOnly: !prev.cpoOnly }))}
             className={`w-full py-2.5 px-4 rounded-lg border-[0.5px] text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
-              filters.cpoOnly ? 'bg-emerald-accent/20 border-emerald-accent text-emerald-accent shadow-[0_0_15px_rgba(0,255,65,0.2)]' : 'bg-white/5 border-silver-frost text-gray-400'
+              filters.cpoOnly ? 'bg-emerald-accent/20 border-emerald-accent text-emerald-accent' : 'bg-white/5 border-silver-frost text-gray-400'
             }`}
           >
             <ShieldCheck className="w-3.5 h-3.5" /> {filters.cpoOnly ? 'CPO ONLY ACTIVE' : 'FILTER BY CPO'}
@@ -115,7 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, setFilters }) => {
         <button 
           onClick={() => setFilters({
             searchQuery: '', makes: [], minPrice: 0, maxPrice: 1000000, 
-            maxMonthlyPayment: 15000, cpoOnly: false,
+            maxMonthlyPayment: 15000, cpoOnly: false, zeroTariffOnly: false,
             minYear: 2000, maxYear: 2025, minVibeScore: 0, regions: [], rarityKeywords: []
           })}
           className="w-full py-3 bg-white/5 border border-silver-frost text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-white hover:border-white transition-all rounded-lg"

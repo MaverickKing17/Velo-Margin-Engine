@@ -3,7 +3,7 @@ import { CarListing } from './types';
 
 export const MAKES = [
   'Porsche', 'Ferrari', 'Lamborghini', 'McLaren', 'Aston Martin', 
-  'Rolls-Royce', 'Bentley', 'Mercedes-AMG', 'BMW M'
+  'Rolls-Royce', 'Bentley', 'Mercedes-AMG', 'BMW M', 'Ford GT'
 ];
 
 export const REGIONS = [
@@ -35,7 +35,7 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Hero Color Premium', 'Collector Grade Miles', 'High US Demand'],
     rarityKeywords: ['Low Miles', 'OTA-Ready'],
     usExportProfitCad: 45000,
-    vin: 'WP0AF2A97PS28xxxx',
+    vin: 'WP0AF2A97PS28xxxx', // W = Germany
     isExportSuitable: true,
     cpoStatus: true,
     hiddenSoftwareValueCad: 8500,
@@ -46,79 +46,70 @@ export const MOCK_LISTINGS: CarListing[] = [
     monthlyPaymentCad: 4850,
     priceDelta7d: -2.4,
     scrapeTimestamp: new Date().toISOString(),
-    priceHistory: [
-      { date: '2024-01-01', price: 325000 },
-      { date: '2024-02-15', price: 315000 }
-    ]
+    priceHistory: [{ date: '2024-01-01', price: 325000 }, { date: '2024-02-15', price: 315000 }]
   },
   {
-    id: '5',
-    title: '2019 Porsche 911 GT3 Touring',
-    make: 'Porsche',
-    model: '911 GT3',
-    year: 2019,
-    trim: 'Touring',
-    odometer: 15200,
-    price: 295000,
-    location: 'Richmond Hill, ON',
-    region: 'Richmond Hill',
-    dealerName: 'Private Seller',
-    originalUrl: 'https://www.autotrader.ca/placeholder5',
-    imageUrl: 'https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?auto=format&fit=crop&q=80&w=1200',
-    description: 'Manual 6-speed Touring. Brewster Green (PTS). Exceptional condition.',
-    vibeScore: 98,
-    aiInsights: ['Brewster Green PTS', 'Manual Transmission', 'Underpriced'],
-    rarityKeywords: ['PTS', 'Manual', 'Full Leather'],
-    usExportProfitCad: 48000,
-    vin: 'WP0AC2A94KS16xxxx',
+    id: '2',
+    title: '2020 Ford GT Heritage Edition',
+    make: 'Ford GT',
+    model: 'Heritage',
+    year: 2020,
+    trim: 'Carbon',
+    odometer: 1200,
+    price: 1250000,
+    location: 'Oakville, ON',
+    region: 'Oakville',
+    dealerName: 'Legendary Motorcar',
+    originalUrl: 'https://www.autotrader.ca/placeholder2',
+    imageUrl: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1200',
+    description: 'Ken Miles Heritage livery. 1 of 50. US-Made powerhouse returning home.',
+    vibeScore: 85, // Will be boosted by +15 for Zero-Tariff
+    aiInsights: ['US-Made Zero Tariff', 'Highest Margin Flip', 'Investment Grade'],
+    rarityKeywords: ['Low Miles', 'Heritage'],
+    usExportProfitCad: 220000,
+    vin: '1FA6P8CF0L5xxxx', // 1 = USA (Zero Tariff)
     isExportSuitable: true,
     cpoStatus: false,
     hiddenSoftwareValueCad: 0,
     recallStatus: 'Clear',
-    daysToTurnGta: 22,
-    daysToTurnUs: 11,
-    vehicleHealthScore: 94,
-    monthlyPaymentCad: 4200,
+    daysToTurnGta: 60,
+    daysToTurnUs: 5,
+    vehicleHealthScore: 100,
+    monthlyPaymentCad: 14500,
     priceDelta7d: 0.0,
     scrapeTimestamp: new Date().toISOString(),
-    priceHistory: [
-      { date: '2023-12-01', price: 305000 },
-      { date: '2024-03-01', price: 295000 }
-    ]
+    priceHistory: [{ date: '2024-03-01', price: 1250000 }]
   },
   {
     id: '3',
-    title: '2022 McLaren 765LT Spider',
-    make: 'McLaren',
-    model: '765LT',
-    year: 2022,
-    trim: 'Spider',
-    odometer: 900,
-    price: 649000,
-    location: 'Oakville, ON',
-    region: 'Oakville',
-    dealerName: 'McLaren Toronto',
+    title: '2023 Ferrari 296 GTB',
+    make: 'Ferrari',
+    model: '296 GTB',
+    year: 2023,
+    trim: 'Assetto Fiorano',
+    odometer: 800,
+    price: 485000,
+    location: 'Downtown Toronto, ON',
+    region: 'Downtown Toronto',
+    dealerName: 'Ferrari of Ontario',
     originalUrl: 'https://www.autotrader.ca/placeholder3',
-    imageUrl: 'https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=1200',
-    description: '1 of 765. MSO Defined Ceramic Grey. Absolute monster for the track.',
-    vibeScore: 91,
-    aiInsights: ['Limited Run', 'MSO Defined', 'Track Package'],
-    rarityKeywords: ['Track Package', 'Low Miles'],
-    usExportProfitCad: 51200,
-    vin: 'SBM13BCA7NW00xxxx',
+    imageUrl: 'https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&q=80&w=1200',
+    description: 'Bianco Cervino. Assetto Fiorano pack. Carbon wheels.',
+    vibeScore: 92,
+    aiInsights: ['Assetto Fiorano Pack', 'Hybrid Efficiency', 'New Model Demand'],
+    rarityKeywords: ['Track Package'],
+    usExportProfitCad: 62000,
+    vin: 'ZFF89ALA1P0xxxx', // Z = Italy
     isExportSuitable: true,
     cpoStatus: true,
-    hiddenSoftwareValueCad: 12500,
+    hiddenSoftwareValueCad: 5000,
     recallStatus: 'Clear',
-    daysToTurnGta: 45,
-    daysToTurnUs: 15,
-    vehicleHealthScore: 99,
-    monthlyPaymentCad: 8900,
-    priceDelta7d: -1.2,
+    daysToTurnGta: 35,
+    daysToTurnUs: 12,
+    vehicleHealthScore: 96,
+    monthlyPaymentCad: 7200,
+    priceDelta7d: -0.5,
     scrapeTimestamp: new Date().toISOString(),
-    priceHistory: [
-      { date: '2024-01-10', price: 659000 },
-      { date: '2024-02-28', price: 649000 }
-    ]
+    priceHistory: [{ date: '2024-02-01', price: 485000 }]
   }
 ];
