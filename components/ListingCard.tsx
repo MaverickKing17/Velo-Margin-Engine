@@ -12,9 +12,10 @@ import { getCarInsights } from '../services/geminiService';
 interface ListingCardProps {
   car: CarListing;
   onPrequalify: (car: CarListing) => void;
+  onAppraisal: (car: CarListing) => void;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
+const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify, onAppraisal }) => {
   const [showInsights, setShowInsights] = useState(false);
   const [aiInsightsText, setAiInsightsText] = useState<string | null>(null);
   const [loadingInsights, setLoadingInsights] = useState(false);
@@ -44,7 +45,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
         <img 
           src={car.imageUrl} 
           alt={car.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {car.cpoStatus && (
@@ -86,7 +87,6 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
               )}
             </div>
             
-            {/* 2026 Audit: Export 2.0 Compliance & Logistics Hub */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-3 bg-luxury-dark/40 rounded-lg border border-border-gray mb-4">
               <div className="space-y-1">
                 <span className="text-[9px] text-gray-500 font-black uppercase tracking-tighter">VIN Decode</span>
@@ -170,19 +170,22 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
         <div className="mt-auto pt-4 flex flex-wrap gap-3 border-t border-border-gray">
           <button 
             onClick={fetchInsights}
-            className="flex items-center gap-2 px-4 py-2 bg-luxury-card border border-border-gray hover:border-deep-gold text-xs font-bold rounded-lg transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-luxury-card border border-border-gray hover:border-deep-gold hover:scale-[1.02] active:scale-[0.98] text-xs font-bold rounded-lg transition-all"
           >
             <BarChart3 className="w-3.5 h-3.5 text-deep-gold" />
             MARKET AUDIT
           </button>
           <button 
             onClick={() => onPrequalify(car)}
-            className="flex items-center gap-2 px-4 py-2 bg-electric-blue hover:bg-electric-blue/90 text-white text-xs font-bold rounded-lg transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-electric-blue hover:bg-electric-blue/90 hover:scale-[1.02] active:scale-[0.98] text-white text-xs font-bold rounded-lg transition-all"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             VOICEFLOW PREQUAL
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-luxury-card border border-border-gray hover:border-emerald-accent text-xs font-bold rounded-lg transition-all ml-auto">
+          <button 
+            onClick={() => onAppraisal(car)}
+            className="flex items-center gap-2 px-4 py-2 bg-luxury-card border border-border-gray hover:border-emerald-accent hover:scale-[1.02] active:scale-[0.98] text-xs font-bold rounded-lg transition-all ml-auto"
+          >
             <DollarSign className="w-3.5 h-3.5 text-emerald-accent" />
             LIVE APPRAISAL
           </button>
