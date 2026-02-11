@@ -28,8 +28,9 @@
             'captivating-blue': '#00A4EF',
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Montserrat', 'sans-serif'],
+            // Using Microsoft Segoe UI as the primary font for everything
+            sans: ['"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+            display: ['"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
             microsoft: ['"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
           },
@@ -46,7 +47,10 @@
       background-attachment: fixed;
       color: #FFFFFF;
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      /* Set global font to Segoe UI */
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     .glass-effect {
       backdrop-filter: blur(12px);
@@ -73,6 +77,14 @@
     ::-webkit-scrollbar-thumb {
       background: #334155;
       border-radius: 3px;
+    }
+    
+    /* Ensuring Microsoft style bold weights feel correct */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600; /* Segoe UI Semibold */
+    }
+    .font-black {
+      font-weight: 700; /* Segoe UI Bold */
     }
   </style>
 <script type="importmap">
