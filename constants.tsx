@@ -35,6 +35,7 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Weissach Package', 'PTS Potential', '8% Below Market'],
     rarityKeywords: ['Weissach', 'Carbon Ceramics', 'Low Miles'],
     usExportProfitCad: 42500,
+    vin: 'WP0AF2A97PS28xxxx'
   },
   {
     id: '2',
@@ -55,6 +56,7 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Tailor Made', 'High US Demand', 'Rare Spec'],
     rarityKeywords: ['Full Leather', 'Carbon Ceramics'],
     usExportProfitCad: 68000,
+    vin: 'ZFF85AHA9L025xxxx'
   },
   {
     id: '3',
@@ -75,6 +77,7 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Limited Run', 'MSO Defined', 'Track Package'],
     rarityKeywords: ['Track Package', 'Low Miles'],
     usExportProfitCad: 51200,
+    vin: 'SBM13BCA7NW00xxxx'
   },
   {
     id: '4',
@@ -115,5 +118,6 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Brewster Green PTS', 'Manual Transmission', 'Underpriced'],
     rarityKeywords: ['PTS', 'Manual', 'Full Leather'],
     usExportProfitCad: 48000,
+    vin: 'WP0AC2A94KS16xxxx'
   }
 ];

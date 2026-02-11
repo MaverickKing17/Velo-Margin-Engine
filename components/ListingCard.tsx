@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { CarListing } from '../types';
 // Fixed: Added Zap to the lucide-react imports
-import { ExternalLink, Bookmark, ShieldCheck, Globe, Info, MessageSquare, Zap } from 'lucide-react';
+import { ExternalLink, Bookmark, ShieldCheck, Globe, Info, MessageSquare, Zap, Fingerprint, Settings2 } from 'lucide-react';
 import VibeScoreDial from './VibeScoreDial';
 import { getCarInsights } from '../services/geminiService';
 
@@ -52,10 +52,27 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
       {/* Content Section */}
       <div className="flex-1 p-5 flex flex-col">
         <div className="flex justify-between items-start mb-2">
-          <div>
-            <h3 className="font-display font-bold text-lg leading-tight mb-1 group-hover:text-deep-gold transition-colors">
+          <div className="flex-1">
+            <h3 className="font-display font-bold text-lg leading-tight mb-2 group-hover:text-deep-gold transition-colors">
               {car.title}
             </h3>
+            
+            {/* New: Trim and VIN Data Points */}
+            <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
+              <div className="flex items-center gap-1.5">
+                <Settings2 className="w-3 h-3 text-gray-500" />
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Trim:</span>
+                <span className="text-xs text-gray-200 font-medium">{car.trim}</span>
+              </div>
+              {car.vin && (
+                <div className="flex items-center gap-1.5">
+                  <Fingerprint className="w-3 h-3 text-gray-500" />
+                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">VIN:</span>
+                  <span className="text-xs text-gray-200 font-mono tracking-tighter opacity-80">{car.vin}</span>
+                </div>
+              )}
+            </div>
+
             <p className="text-gray-400 text-sm flex items-center gap-1">
               <Globe className="w-3.5 h-3.5" />
               {car.location} • {car.dealerName}
