@@ -57,7 +57,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
               {car.title}
             </h3>
             
-            {/* Trim, VIN, and Profit Data Points */}
+            {/* Trim, VIN, Profit and Export Status Data Points */}
             <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
               <div className="flex items-center gap-1.5">
                 <Settings2 className="w-3 h-3 text-gray-500" />
@@ -73,8 +73,15 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
               )}
               <div className="flex items-center gap-1.5">
                 <TrendingUp className="w-3 h-3 text-emerald-accent" />
-                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">US Export Profit (CAD):</span>
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">US Profit:</span>
                 <span className="text-xs text-emerald-accent font-bold">${car.usExportProfitCad.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck className={`w-3 h-3 ${car.isExportSuitable ? 'text-emerald-accent' : 'text-amber-500'}`} />
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Export Status:</span>
+                <span className={`text-[10px] font-black px-1.5 rounded-sm ${car.isExportSuitable ? 'bg-emerald-accent/20 text-emerald-accent' : 'bg-amber-500/20 text-amber-500'}`}>
+                  {car.isExportSuitable ? 'ELIGIBLE' : 'REVIEW REQ.'}
+                </span>
               </div>
             </div>
 

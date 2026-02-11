@@ -19,6 +19,7 @@ export interface CarListing {
   region: string;
   vin?: string;
   usExportProfitCad: number;
+  isExportSuitable: boolean;
 }
 
 export interface FilterState {

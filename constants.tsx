@@ -35,7 +35,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Hero Color Premium', 'Collector Grade Miles', 'High US Demand'],
     rarityKeywords: ['Low Miles'],
     usExportProfitCad: 45000,
-    vin: 'WP0AF2A97PS28xxxx'
+    vin: 'WP0AF2A97PS28xxxx',
+    isExportSuitable: true
   },
   {
     id: '6',
@@ -56,7 +57,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Standard Spec', 'Driver Grade Miles', 'Stable Value'],
     rarityKeywords: ['CPO'],
     usExportProfitCad: 18000,
-    vin: 'WP0AF2A94PS29xxxx'
+    vin: 'WP0AF2A94PS29xxxx',
+    isExportSuitable: true
   },
   {
     id: '2',
@@ -77,7 +79,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Tailor Made', 'High US Demand', 'Rare Spec'],
     rarityKeywords: ['Full Leather', 'Carbon Ceramics'],
     usExportProfitCad: 68000,
-    vin: 'ZFF85AHA9L025xxxx'
+    vin: 'ZFF85AHA9L025xxxx',
+    isExportSuitable: true
   },
   {
     id: '3',
@@ -98,7 +101,8 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Limited Run', 'MSO Defined', 'Track Package'],
     rarityKeywords: ['Track Package', 'Low Miles'],
     usExportProfitCad: 51200,
-    vin: 'SBM13BCA7NW00xxxx'
+    vin: 'SBM13BCA7NW00xxxx',
+    isExportSuitable: true
   },
   {
     id: '4',
@@ -119,6 +123,7 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Solid Investment', 'CPO Warranty', '12% Margin'],
     rarityKeywords: ['Carbon Ceramics', 'CPO'],
     usExportProfitCad: 34000,
+    isExportSuitable: true
   },
   {
     id: '5',
@@ -139,6 +144,7 @@ export const MOCK_LISTINGS: CarListing[] = [
     aiInsights: ['Brewster Green PTS', 'Manual Transmission', 'Underpriced'],
     rarityKeywords: ['PTS', 'Manual', 'Full Leather'],
     usExportProfitCad: 48000,
-    vin: 'WP0AC2A94KS16xxxx'
+    vin: 'WP0AC2A94KS16xxxx',
+    isExportSuitable: true
   }
 ];
