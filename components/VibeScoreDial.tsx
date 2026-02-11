@@ -8,15 +8,9 @@ interface VibeScoreDialProps {
 
 const VibeScoreDial: React.FC<VibeScoreDialProps> = ({ score, size = 'md' }) => {
   const getColor = () => {
-    if (score >= 80) return '#10B981'; // Emerald
-    if (score >= 50) return '#FBBF24'; // Amber
-    return '#EF4444'; // Red
-  };
-
-  const getLabel = () => {
-    if (score >= 80) return 'High Opportunity';
-    if (score >= 50) return 'Good Opportunity';
-    return 'Standard Listing';
+    if (score >= 80) return '#FFD700'; // Electric Gold
+    if (score >= 50) return '#50C878'; // Emerald Green
+    return '#E30613'; // Brembo Red
   };
 
   const sizes = {
@@ -40,29 +34,25 @@ const VibeScoreDial: React.FC<VibeScoreDialProps> = ({ score, size = 'md' }) => 
             stroke="currentColor"
             strokeWidth="4"
             fill="transparent"
-            className="text-luxury-dark/30"
+            className="text-white/10"
           />
           <circle
             cx="50%"
             cy="50%"
             r={radius}
             stroke={getColor()}
-            strokeWidth="4"
+            strokeWidth="5"
             fill="transparent"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
+            className="transition-all duration-1000 ease-out"
           />
         </svg>
-        <span className="absolute font-bold font-display" style={{ color: getColor() }}>
+        <span className="absolute font-mono font-black text-white" style={{ fontSize: size === 'sm' ? '10px' : '14px' }}>
           {score}
         </span>
       </div>
-      {size === 'lg' && (
-        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: getColor() }}>
-          {getLabel()}
-        </span>
-      )}
     </div>
   );
 };
