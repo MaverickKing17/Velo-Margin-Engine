@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { CarListing } from '../types';
 // Fixed: Added Zap to the lucide-react imports
-import { ExternalLink, Bookmark, ShieldCheck, Globe, Info, MessageSquare, Zap, Fingerprint, Settings2 } from 'lucide-react';
+import { ExternalLink, Bookmark, ShieldCheck, Globe, Info, MessageSquare, Zap, Fingerprint, Settings2, TrendingUp } from 'lucide-react';
 import VibeScoreDial from './VibeScoreDial';
 import { getCarInsights } from '../services/geminiService';
 
@@ -57,7 +57,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
               {car.title}
             </h3>
             
-            {/* New: Trim and VIN Data Points */}
+            {/* Trim, VIN, and Profit Data Points */}
             <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
               <div className="flex items-center gap-1.5">
                 <Settings2 className="w-3 h-3 text-gray-500" />
@@ -71,6 +71,11 @@ const ListingCard: React.FC<ListingCardProps> = ({ car, onPrequalify }) => {
                   <span className="text-xs text-gray-200 font-mono tracking-tighter opacity-80">{car.vin}</span>
                 </div>
               )}
+              <div className="flex items-center gap-1.5">
+                <TrendingUp className="w-3 h-3 text-emerald-accent" />
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">US Export Profit (CAD):</span>
+                <span className="text-xs text-emerald-accent font-bold">${car.usExportProfitCad.toLocaleString()}</span>
+              </div>
             </div>
 
             <p className="text-gray-400 text-sm flex items-center gap-1">
