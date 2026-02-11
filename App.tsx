@@ -7,7 +7,7 @@ import ListingCard from './components/ListingCard';
 import Footer from './components/Footer';
 import { MOCK_LISTINGS } from './constants';
 import { FilterState, CarListing } from './types';
-import { Loader2, AlertTriangle, CheckCircle2, TrendingUp, X } from 'lucide-react';
+import { Loader2, AlertTriangle, CheckCircle2, TrendingUp, X, Shield, Scale, Info, HelpCircle } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const [listings, setListings] = useState<CarListing[]>(MOCK_LISTINGS);
@@ -78,19 +78,64 @@ const Dashboard: React.FC = () => {
   const getLegalContent = (tab: string) => {
     switch (tab) {
       case 'Privacy Policy':
-        return "Exotic Intel GTA is committed to protecting the sensitive financial data of our brokers. We use AES-256 encryption for all VIN-related queries and arbitrage logs. Your data is never sold to third-party dealerships.";
+        return `Exotic Intel GTA (the "Platform") is committed to maintaining the highest standards of data integrity and broker confidentiality. In the 2026 regulatory landscape, we adhere strictly to the updated PIPEDA and GDPR+ protocols.
+
+1. Data Encryption: All VIN-specific queries, arbitrage logs, and broker search histories are protected by AES-256 military-grade encryption.
+2. Anonymization: Our AI-driven market analysis tools process vehicle data in an anonymized aggregate format to prevent the unauthorized identification of private sellers or specialized collection units.
+3. Third-Party Sharing: We do not sell user data to third-party dealerships. Your "Hidden Value" sourcing leads are your proprietary assets.
+4. Data Residency: All Platform data is hosted on secured servers located within the Greater Toronto Area (GTA) to ensure compliance with Canadian data sovereignty laws.`;
       case 'Terms of Service':
-        return "By using the 2026 Audit Dashboard, you agree to treat all FoD (Feature-on-Demand) scores as estimates. Profit calculations are based on live FX feeds which may fluctuate during settlement.";
+        return `By accessing the Exotic Intel GTA 2026 Audit Dashboard, you acknowledge and agree to the following operational parameters:
+
+1. Estimates Only: All "FoD" (Feature-on-Demand) scores, software unlock values, and "DTT" (Days-to-Turn) predictors are generated via predictive AI models. These represent high-probability estimates and do not constitute a financial guarantee.
+2. Market Volatility: Profit calculations are subject to the real-time CAD/USD settlement rate at the precise moment of border entry. Brokers are advised to use our volatility-locked FX tool for final settlement.
+3. Usage Limits: This platform is licensed for professional brokerage use in the GTA region. Unauthorized scraping or distribution of our proprietary "Vibe Scores" is strictly prohibited.
+4. Liability: Exotic Intel GTA shall not be held liable for mechanical discrepancies or undisclosed vehicle damage not present in the digital VIN-record at the time of sourcing.`;
       case 'DMCA Compliance':
-        return "We respect intellectual property. All vehicle images are sourced via authorized API channels or dealership partnerships. For takedown requests, contact legal@exoticgta.ca.";
+        return `Exotic Intel GTA respects the intellectual property rights of all automotive photographers, dealerships, and marketing agencies.
+
+1. Content Sourcing: Vehicle imagery displayed on this dashboard is sourced via authorized manufacturer API channels, dealership partner feeds, or open-market listings intended for public distribution.
+2. Infringement Notification: If you believe your copyrighted material is being used without authorization, please submit a formal DMCA Takedown Notice to our legal team.
+3. Required Information: Notices must include a description of the copyrighted work, the specific URL of the infringing content, and your direct contact information.
+4. Resolution Process: We aim to resolve all verified DMCA claims within 48 business hours of receipt. Direct all inquiries to legal@exoticgta.ca.`;
       case 'Cookie Policy':
-        return "We use session-based cookies to remember your sourcing filters and brokerage preferences across Vaughan and Oakville regional hubs.";
+        return `Our platform utilizes advanced 2026 browser state management to provide a seamless sourcing experience.
+
+1. Essential Cookies: Required for secure login, session persistence, and maintaining your real-time arbitrage filter states across regional hubs.
+2. Analytics: We use anonymized telemetry to optimize dashboard performance and ensure our "Live Appraisal" tool maintains ultra-low latency.
+3. Customization: These allow the platform to remember your manufacturer preferences (e.g., Porsche PTS focus) and preferred GTA sourcing regions (Yorkville vs Oakville).
+4. Opt-Out: Users may disable non-essential cookies via their browser settings, though this may impact the accuracy of the "Days-to-Turn" predictor and personalized lead notifications.`;
       case 'Export Compliance 2.0':
-        return "Our platform automatically cross-references NHTSA recall databases and EPA federalization standards for all units marked as 'Export Suitable'.";
+        return `Export Compliance 2.0 is our proprietary framework for navigating the 2026 US-Canada automotive border regulations.
+
+1. Recall Integration: Our system performs automated hourly checks against the NHTSA (National Highway Traffic Safety Administration) and Transport Canada databases for every VIN listed.
+2. Federalization Standards: Units marked as "Export Suitable" have been pre-screened for EPA emissions compliance and FMVSS safety standards.
+3. Title Conversion: We provide automated documentation prep for Form 1 and DOTHS-7 clearance, ensuring title conversion in the destination US state (e.g., Florida, California, or Texas) is frictionless.
+4. Arbitrage Verification: Every "Eligible" badge is backed by a digital audit trail confirming the unit meets the strict 2026 criteria for high-margin cross-border transfer.`;
       case 'Customer Support':
-        return "Our dedicated broker support line is available 24/7. For technical issues with the Voiceflow integration or live appraisal tool, please submit a ticket at help.exoticgta.ca.";
+        return `Exotic Intel GTA provides 24/7 Concierge Support for our elite broker network.
+
+1. Technical Assistance: Our engineering team in Oakville is available to troubleshoot Voiceflow CRM integrations, API disconnects, or Telemetry data stream issues.
+2. Market Intelligence: Access our "Master Broker" line for human-assisted verification on high-value "FoD" (Feature-on-Demand) hardware locks.
+3. Logistics Support: Our Vaughan Logistics Hub provides real-time tracking for units currently in the export pipeline.
+4. Contact Channels: 
+   - Voice Concierge: +1 (888) EXOTIC-1
+   - Digital Ticket: help.exoticgta.ca
+   - Physical Inquiries: Visit our Yorkville Office at 100 Yorkville Ave.`;
       default:
         return "Content pending verification from GTA Legal Group.";
+    }
+  };
+
+  const getIcon = (tab: string) => {
+    switch (tab) {
+      case 'Privacy Policy': return <Shield className="w-8 h-8 text-emerald-accent mb-4" />;
+      case 'Terms of Service': return <Scale className="w-8 h-8 text-deep-gold mb-4" />;
+      case 'DMCA Compliance': return <Info className="w-8 h-8 text-electric-blue mb-4" />;
+      case 'Cookie Policy': return <Info className="w-8 h-8 text-gray-400 mb-4" />;
+      case 'Export Compliance 2.0': return <TrendingUp className="w-8 h-8 text-emerald-accent mb-4" />;
+      case 'Customer Support': return <HelpCircle className="w-8 h-8 text-electric-blue mb-4" />;
+      default: return <Info className="w-8 h-8 text-white mb-4" />;
     }
   };
 
@@ -168,16 +213,20 @@ const Dashboard: React.FC = () => {
             >
               <X className="w-6 h-6 text-gray-400" />
             </button>
-            <h2 className="text-3xl font-display font-bold text-deep-gold mb-6">{activeLegalTab}</h2>
-            <div className="text-gray-200 text-lg leading-relaxed font-medium">
+            <div className="flex flex-col items-center mb-8 text-center">
+              {getIcon(activeLegalTab)}
+              <h2 className="text-3xl font-display font-bold text-deep-gold">{activeLegalTab}</h2>
+              <div className="w-16 h-1 bg-border-gray mt-4 rounded-full"></div>
+            </div>
+            <div className="text-gray-200 text-lg leading-relaxed font-medium overflow-y-auto max-h-[60vh] pr-4 whitespace-pre-line">
               {getLegalContent(activeLegalTab)}
             </div>
             <div className="mt-10 flex justify-end">
               <button 
                 onClick={() => setActiveLegalTab(null)}
-                className="px-8 py-3 bg-deep-gold text-luxury-dark font-black uppercase rounded-xl hover:bg-white transition-all text-sm"
+                className="px-8 py-4 bg-deep-gold hover:bg-white text-luxury-dark font-black uppercase rounded-xl transition-all text-sm tracking-widest shadow-lg shadow-deep-gold/10"
               >
-                Close Audit
+                CLOSE AUDIT
               </button>
             </div>
           </div>
