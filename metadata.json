@@ -1,0 +1,8 @@
+{
+  "name": "Exotic Intel GTA",
+  "description": "An AI-powered luxury car arbitrage dashboard for GTA-based brokers, identifying high-margin export opportunities and rare specs with a unique Vibe Score.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
